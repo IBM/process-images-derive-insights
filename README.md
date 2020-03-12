@@ -1,3 +1,4 @@
+# WORK IN PROGRESS
 # Extract relevant text content from an image and derive insights
 
 This code pattern demonstrates a methodology of deriving insights from scanned documents that has information organized into various sections or layouts.
@@ -46,10 +47,6 @@ When the reader has completed this Code Pattern, they will understand how to:
 5. The individual classified image is sent to the Text extractor service where the address text is extracted.
 6. The extracted address text is sent to Watson Language Translator where the content is translated to English.
 7. The translated text in English is sent to Watson Natural Language Understanding where the entities of interest is extracted to generate the required insights.
-
-<!--Optionally, update this section when the video is created-->
-# Watch the Video
-
 
 ## Pre-requisites
 * [IBM Cloud account](https://www.ibm.com/cloud/): Create an IBM Cloud account.
