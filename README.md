@@ -395,14 +395,19 @@ You can see the application deployed under the insights project on the OpenShift
 Create an instance of Watson Studio [here](https://cloud.ibm.com/catalog/services/watson-studio)
 ![](images/ws_create.png)
 
+Click `Create`.
+
  #### 8.15 Import the notebook and configure
 
-Create a new project `insights`
+Create a new project `insights` by selecting `New Project`.
+
 ![](images/create_project.png)
 
-Import the notebook `process_image_insights.ipynb` which is under `notebook` folder in this repo that you have cloned.
+Select `Add to project` and `Notebook`.
 
 ![](images/create_notebook.png)
+
+Import the notebook `process_image_insights.ipynb` which is under `notebook` folder in this repo that you have cloned.
 
 ![](images/import_notebook.png)
 
