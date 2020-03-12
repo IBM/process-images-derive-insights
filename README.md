@@ -355,6 +355,12 @@ Let us create a project by name `insights`.
 ```
     oc new-project insights
 ```
+
+Give root permissions to the `default` service account.
+```
+    oc adm policy add-scc-to-user anyuid -z default
+```
+
  #### 8.10 Deploy the text extractor service
 
 Go to the appsody folder `text_extractor` we created earlier on the terminal. Run the command below:
