@@ -407,7 +407,7 @@ Select `Add to project` and `Notebook`.
 
 ![](images/create_notebook.png)
 
-Import the notebook `process_image_insights.ipynb` which is under `notebook` folder in this repo that you have cloned.
+Import the notebook `process_image_insights.ipynb` which is under `notebook` folder in this repo that you have cloned. Click `Create notebook`.
 
 ![](images/import_notebook.png)
 
