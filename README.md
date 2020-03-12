@@ -266,22 +266,22 @@ Copy the `Credentials`, both `API Key` and `URL` as shown below and make a note 
   ```
  Goto the `image_preprocessor` folder and run the below commands:
   ```
-  $ appsody run -p 3501:8080 -p 3502:5678
+  $ appsody run -p 4501:8080 -p 3502:5678
   ```
  Goto the `object_storage_operations` folder and run the below commands:
   ```
-  $ appsody run -p 3501:8080 -p 3502:5678
+  $ appsody run -p 5501:8080 -p 3502:5678
   ```
 
  #### 7.2 Set up and run jupyter notebook
 
  * Launch jupyter notebook.
- * Upload `Newspaper_processing_insights.ipynb` which is under `Notebook` folder in this repo that you have cloned.
+ * Upload `process_image_insights.ipynb` which is under `notebook` folder in this repo that you have cloned.
  * Goto `section 1.3` in the notebook.
 
  ![](images/notebook_news.png)
 
- * Specify the local path of `image_preprocessor` and `object_storage_operations` files under `path_app2` and `path_app3` respectively.
+ * Specify the urls for the `text_extractor`(http://localhost:3501), `image_preprocessor`(http://localhost:4501) and `object_storage_operations`(http://localhost:5501). 
  * Fill the Language translator and Natural language understanding credentials that you have noted in step 5 and step 6 accordingly.
 
  * Click on `Run All` under `Cell` tab. Else you can run the notebook cell by cell by clicking on `Run` on each cell.
@@ -398,7 +398,16 @@ You can see the application deployed under the insights project on the OpenShift
 Create an instance of Watson Studio [here](https://cloud.ibm.com/catalog/services/watson-studio)
 
  #### 8.15 Import the notebook and configure
-TODO
+
+Create a new project `insights`
+Import the notebook `process_image_insights.ipynb` which is under `notebook` folder in this repo that you have cloned.
+Goto `section 1.3` in the notebook.
+
+ ![](images/notebook_news.png)
+
+ * Specify the urls for the `image_preprocessor`, `text_extractor` and `object_storage_operations`.
+ * Fill the Language translator and Natural language understanding credentials that you have noted in step 5 and step 6 accordingly.
+ * Click on `Run All` under `Cell` tab. Else you can run the notebook cell by cell by clicking on `Run` on each cell.
 
 ### 9. Analyze the results
 
