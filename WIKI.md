@@ -19,13 +19,13 @@ NA
 
 ## Summary
 
-Extracting information from specific sections of a newspaper/scanned document and processing them is a very inefficient and tedious job, especially when there are thousands of documents. What if we programatically extract information from different sections and also give you insights about those sections? Wouldn't it be much easier and more efficient ? We are doing exactly the same, in this code pattern.
+Extracting information from specific sections of a newspaper/scanned document and processing them is a very inefficient and tedious job, especially when there are thousands of documents. What if we programatically extract information from different sections from the document and also give you insights about those sections? Wouldn't it be much easier and more efficient ? We are doing exactly the same, in this code pattern.
 This code pattern demonstrates a methodology of deriving insights from scanned documents that has information organized into various sections or layouts.
 
 
 ## Description
 
-In this code patterns we make use of various appsody stacks, to build required microservices and deploy them on OpenShift cluster on IBM Cloud. We use a master application deployed on wastson studio to orchestrate betweeen these microservices, to process and extract information from the scanned documents that has information organized into various sections or layouts. The information extracted is feed to Watson Language Translator service which converts non-english text into english text. This converted text is feed to Watson Natural Language Understanding service which gives us key information in the text. We use the output given by Watson Language Understanding service to form meaningful graphical insights.
+In this code patterns we make use of various appsody stacks, to build required microservices and deploy them on OpenShift cluster on IBM Cloud. We use a master application deployed on wastson studio to orchestrate betweeen these microservices. These microservices help us in processing  and extracting information from the scanned documents that has information organized into various sections or layouts. The information extracted is feed to Watson Language Translator service which converts non-english text into english text. This converted text is feed to Watson Natural Language Understanding service which gives us key information in the text. We use the output given by Watson Language Understanding service to form meaningful graphical insights.
 
 When the reader has completed this Code Pattern, they will understand how to:
 
