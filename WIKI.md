@@ -52,12 +52,6 @@ Use Watson Natural language Understanding to derive insights on the text.
 
 ## Included components
 
-* [IBM Cloud Pak for Application](https://www.ibm.com/cloud/cloud-pak-for-applications): The IBM Cloud Pak for Applications provides a complete and consistent experience to speed development of applications. You can easily modernize your existing applications with IBM integrated tools and develop new cloud-native applications faster for deployment on any cloud.
-
-* [Transformation Advisor](https://www.ibm.com/in-en/marketplace/cloud-transformation-advisor): Not every workload should move to cloud. The right choice can yield large cost savings and speed time to market. The Transformation Advisor tool can help you decide.
-   
-* [WebSphere Liberty](https://www.ibm.com/cloud/websphere-liberty): A dynamic and easy-to-use Java EE application server, with fast startup times, no server restarts to pick up changes, and a simple XML configuration.
-
 * [IBM Cloud account](https://www.ibm.com/cloud/): IBM cloud computing is a set of cloud computing services for business offered by the information technology company IBM.
 
 * [Jupyter Software](https://jupyter.org/install): Project Jupyter is a nonprofit organization created to "develop open-source software, open-standards, and services for interactive computing across dozens of programming languages".
@@ -74,4 +68,5 @@ Use Watson Natural language Understanding to derive insights on the text.
 ## Links
 
 1. [Create a custom Appsody stack with support for Python Flask and Tesseract](https://developer.ibm.com/tutorials/create-a-custom-appsody-stack-with-python-flask-and-tesseract-support/)
+
 TODO - provide tutorial links
