@@ -21,7 +21,7 @@ NA
 
 This code pattern demonstrates a methodology of deriving insights from scanned documents that has information organized into various sections or layouts.
 
-Extracting information specific sections from a newspaper/scanned document and processing them is a very inefficient and tedious job, especially when there are thousands of documents. Whats if we extract the secions and also give you insights about those sections? Wouldn't it be much easier and more efficient ? We are doing exactly the same, in this code pattern.
+Extracting information from specific sections of a newspaper/scanned document and processing them is a very inefficient and tedious job, especially when there are thousands of documents. Whats if we extract the secions and also give you insights about those sections? Wouldn't it be much easier and more efficient ? We are doing exactly the same, in this code pattern.
 This code pattern demonstrates a methodology of deriving insights from scanned documents that has information organized into various sections or layouts.
 
 
