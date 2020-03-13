@@ -19,14 +19,9 @@ NA
 
 ## Summary
 
-If you have existing on-premises WebSphere Application Server apps and can benefit by moving them to the cloud, 
-this code pattern is for you. A simple demo app shows how to run a custom data collector to analyze an app and provide
-recommendations, cost estimates, and detailed reports to help with your transformation project using IBM Cloud Pak for Application. You see how to generate the artifacts you need and get your application deployed and running in a Liberty container on the OpenShift Platform.
-
 This code pattern demonstrates a methodology of deriving insights from scanned documents that has information organized into various sections or layouts.
 
-Extracting information specific sections from a newspaper/scanned document and processing them is a very inefficient and tedious job, especially when there are thousands of documents.
-Whats if we extract the secions and also give you insights about those sections? Wouldn't it be much easier and more efficient ? We are doing exactly the same, in this code pattern.
+Extracting information specific sections from a newspaper/scanned document and processing them is a very inefficient and tedious job, especially when there are thousands of documents. Whats if we extract the secions and also give you insights about those sections? Wouldn't it be much easier and more efficient ? We are doing exactly the same, in this code pattern.
 This code pattern demonstrates a methodology of deriving insights from scanned documents that has information organized into various sections or layouts.
 
 
