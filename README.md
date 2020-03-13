@@ -52,7 +52,7 @@ When the reader has completed this Code Pattern, they will understand how to:
 * [IBM Cloud account](https://www.ibm.com/cloud/): Create an IBM Cloud account.
 * [Python 3](https://www.python.org/downloads/): Install python 3.
 * [Jupyter Software](https://jupyter.org/install): Install Jupyter Software.
-* [Appsody CLI] (https://appsody.dev/docs/installing/installing-appsody)
+* [Appsody CLI](https://appsody.dev/docs/installing/installing-appsody): Install Appsody CLI.
 
 # Steps
 
