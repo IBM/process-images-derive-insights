@@ -474,4 +474,7 @@ Similarly, lets now try with `West Bengal` and press enter,
 # Related Content
 
 1. [Create a custom Appsody stack with support for Python Flask and Tesseract](https://developer.ibm.com/tutorials/create-a-custom-appsody-stack-with-python-flask-and-tesseract-support/)
-TODO - provide tutorial links
+
+2. [Create a custom Appsody stack with support for Python Flask and OpenCV](https://developer.ibm.com/tutorials/create-a-custom-appsody-stack-with-python-flask-and-opencv-support/)
+
+3. TODO - Add Object storage tutorial link
