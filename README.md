@@ -1,4 +1,3 @@
-# WORK IN PROGRESS
 # Extract relevant text content from an image and derive insights
 
 This code pattern demonstrates a methodology of deriving insights from scanned documents that has information organized into various sections or layouts.
@@ -117,7 +116,15 @@ Press Ctrl+C on the terminal to stop the running server.
 
 ### 3. Create image pre-processor service
 
-  #### 3.1 [TODO - Link tutorial steps]
+  #### 3.1 Create an appsody stack with Python Flask and OpenCV support
+
+  Please refer to the below 3 steps in the tutorial [Create a custom Appsody stack with support for Python Flask and OpenCV](https://developer.ibm.com/tutorials/create-a-custom-appsody-stack-with-python-flask-and-opencv-support/) to create the appsody stack.
+
+a. [Create a copy of an Appsody Python Flask stack](https://developer.ibm.com/tutorials/create-a-custom-appsody-stack-with-python-flask-and-opencv-support/#1-create-copy-of-python-flask-stack)
+
+b. [Modify the Python Flask stack to add support for Tesseract](https://developer.ibm.com/tutorials/create-a-custom-appsody-stack-with-python-flask-and-opencv-support/#2-modify-the-python-flask-stack-to-add-support-for-opencv)
+
+c. [Build the stack](https://developer.ibm.com/tutorials/create-a-custom-appsody-stack-with-python-flask-and-opencv-support/#3-build-the-stack)
 
  #### 3.2 Create an appsody project using the new stack
 
