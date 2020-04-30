@@ -25,7 +25,7 @@ This code pattern demonstrates a methodology of deriving insights from scanned d
 
 ## Description
 
-In this code patterns we make use of various appsody stacks, to build required microservices and deploy them on OpenShift cluster on IBM Cloud. We use a master application deployed on wastson studio to orchestrate between these microservices. These microservices help us in processing  and extracting information from the scanned documents that has information organized into various sections or layouts. The information extracted is feed to Watson Language Translator service which converts non-english text into english text. This converted text is feed to Watson Natural Language Understanding service which gives us key information in the text. We use the output given by Watson Language Understanding service to form meaningful graphical insights.
+In this code patterns we make use of various appsody stacks, to build required microservices and deploy them on OpenShift cluster on IBM Cloud. We use a master application deployed on Watson Studio to orchestrate between these microservices. These microservices help us in processing  and extracting information from the scanned documents that has information organized into various sections or layouts. The information extracted is feed to Watson Language Translator service which converts non-english text into english text. This converted text is feed to Watson Natural Language Understanding service which gives us key information in the text. We use the output given by Watson Language Understanding service to form meaningful graphical insights.
 
 When the reader has completed this Code Pattern, they will understand how to:
 
