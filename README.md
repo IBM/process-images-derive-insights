@@ -409,9 +409,9 @@ spec:
 You will see the route to the service as seen below:
 ```
 NAME    HOST/PORT           PATH                                                                      SERVICES                 PORT   TERMINATION   WILDCARD
-text-extractor              text-extractor-default...us-south.containers.appdomain.cloud*             text-extractor                  web           None
-image-preprocessor          image-preprocessor-default...us-south.containers.appdomain.cloud*         image-preprocessor              web           None
-object-storage-operations   *object-storage-operations-default...us-south.containers.appdomain.cloud*  object-storage-operations       web           None
+text-extractor              text-extractor-default...us-south.containers.appdomain.cloud             text-extractor                  web           None
+image-preprocessor          image-preprocessor-default...us-south.containers.appdomain.cloud         image-preprocessor              web           None
+object-storage-operations   object-storage-operations-default...us-south.containers.appdomain.cloud  object-storage-operations       web           None
 ```
 Note down the urls under `PATH` column for the services as shown.
 
