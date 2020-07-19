@@ -292,116 +292,126 @@ Copy the `Credentials`, both `API Key` and `URL` as shown below and make a note 
 
 ### 8. Deploy and run on cloud
 
- #### 8.1 Create an instance of OpenShift cluster on IBM Cloud
+#### 8.1 Login to IBM Cloud
+
+    ```
+    ibmcloud login
+    ```
+    
+#### 8.2 Add a namespace to create your own image repository. Replace <my_namespace> with your preferred namespace.
+
+    ```
+    ibmcloud cr namespace-add <my_namespace>
+    ```
+    
+#### 8.3 To ensure that your namespace is created, run the ibmcloud cr namespace-list command.
+
+    ```
+    ibmcloud cr namespace-list
+    ```
+    
+#### 8.4 Tag the docker image. Replace the placeholder with the region of the container registry.
+
+    ```
+    docker tag text-extractor/text-extractor:latest <region>.icr.io/<my_namespace>/text-extractor:latest
+    docker tag image-preprocessor/image-preprocessor:latest <region>.icr.io/<my_namespace>/image-preprocessor:latest
+    docker tag object-storage-operations/object-storage-operations:latest <region>.icr.io/<my_namespace>/object-storage-operations:latest
+    ```
+    
+#### 8.5 Push the docker images into your namespace. Replace the placeholders for region, namespace with your container registry region and the namespace created earlier. 
+
+    ```
+    ibmcloud cr login
+    docker push <region>.icr.io/<my_namespace>/text-extractor:latest
+    docker push <region>.icr.io/<my_namespace>/image-preprocessor:latest
+    docker push <region>.icr.io/<my_namespace>/object-storage-operations:latest
+    ```
+#### 8.6 Create an instance of OpenShift cluster on IBM Cloud
 
 Create a OpenShift cluster [here](https://cloud.ibm.com/kubernetes/catalog/openshiftcluster).
 ![](images/openshift_create.png)
 
- #### 8.2 Open the OpenShift console
+ #### 8.7 Open the OpenShift console
 
 ![](images/open_console.png)
 
- #### 8.3 Log in to OpenShift using the CLI and create a new project
+ #### 8.8 Log in to OpenShift using the CLI and create a new project
 
 ![](images/copy_login_command.png)
 
- #### 8.4 Create a route for your Docker registry if not already created
+#### 8.9. Create a deployment configurations files  for the three services with the below contents. 
 
+Create three deployment configuration files - text_extractor_deploy.yaml,image_preprocessor_deploy.yaml and object_storage_operations_deploy.yaml.
+Replace the region, namespace, service name with your container registry region, the namespace created earlier and service name(text-extractor / image-preprocessor / object-storage-operations)  
 ```
-  $ oc project default
-  $ oc get svc
-```
-
-The output appears as shown below:
-
-```
-  NAME               TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)                      AGE
-  docker-registry    ClusterIP      172.21.xxx.xx    <none>           5000/TCP                     18h
-  kubernetes         ClusterIP      172.21.x.x       <none>           443/TCP,53/UDP,53/TCP        18h
-  myfirstosdeploy    ClusterIP      172.21.xx.xxx    <none>           5000/TCP                     17h
-  registry-console   ClusterIP      172.21.xxx.xxx   <none>           9000/TCP                     18h
-  router             LoadBalancer   172.21.xx.x      169.47.xxx.xxx   80:31297/TCP,443:30385/TCP   18h
-
-```
- #### 8.5 Run the following command to create a route to the Docker registry
-
-```
-  $ oc create route reencrypt --service=docker-registry
-```
-
- #### 8.6 Check the create route details
-
-```
-  $ oc get route docker-registry
-```
-
-The output appears as shown below:
-```
- NAME              HOST/PORT                                                                                                            PATH      SERVICES          PORT       TERMINATION   WILDCARD
-  docker-registry   docker-registry-default.clustersiteam-5290cxxxxxxxxxxd1b85xxx-0001.us-east.containers.appdomain.cloud               docker-registry   5000-tcp   reencrypt     None
-```
-
- #### 8.7 Note the Docker registry URL that is displayed with the pattern — docker-registry-default.<cluster_name>-<ID_string>.<region>.containers.appdomain.cloud
-
-Set it as a variable.
-
-```
- export IMAGE_REGISTRY=docker-registry-default.<cluster_name>-<ID_string>.<region>.containers.appdomain.cloud
-```
-
- #### 8.8 Log in to the Docker registry
-
-```
-  docker login -u $(oc whoami) -p $(oc whoami -t) $IMAGE_REGISTRY
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: <service name>-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: <service name>
+  template:
+    metadata:
+      labels:
+        app: <service name>
+    spec:
+      containers:
+      - name: <service name>
+        image: <region>.icr.io/<namespace>/<service name>:latest
+    ports:
+    - containerPort: 8080
+      protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: <service name>
+  name: <service name>
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+    name: web
+  selector:
+    app: <service name>
+  type: ClusterIP
 ```
 
- #### 8.9 Create a new project
+#### 8.11 Create the deployments in your cluster.
 
-Let us create a project by name `insights`.
+    ```
+    oc apply -f text_extractor_deploy.yaml
+    oc apply -f image_preprocessor_deploy.yaml
+    oc apply -f object_storage_operations_deploy.yaml
+    ```
+    
+#### 8.12  Create a route for the services.
 
-```
-    oc new-project insights
-```
+    ```
+    oc expose service/text-extractor
+    oc expose service/image-preprocessor
+    oc expose service/object-storage-operations
+    ```
+    
+#### 8.13 Get the route for the service   
 
-Give root permissions to the `default` service account.
+    ```
+    oc get routes
+    ```
+    
+You will see the route to the service as seen below:
 ```
-    oc adm policy add-scc-to-user anyuid -z default
+NAME    HOST/PORT           PATH                                                                      SERVICES                 PORT   TERMINATION   WILDCARD
+text-extractor              text-extractor-default...us-south.containers.appdomain.cloud*             text-extractor                  web           None
+image-preprocessor          image-preprocessor-default...us-south.containers.appdomain.cloud*         image-preprocessor              web           None
+object-storage-operations   *object-storage-operations-default...us-south.containers.appdomain.cloud*  object-storage-operations       web           None
 ```
-
- #### 8.10 Deploy the text extractor service
-
-Go to the appsody folder `text_extractor` we created earlier on the terminal. Run the command below:
-```
- appsody deploy --tag insights/text-extractor --push-url $IMAGE_REGISTRY --push --pull-url docker-registry.default.svc.cluster.local:5000
-```
-
- #### 8.11 Deploy the image pre-processor service
-
-Go to the appsody project folder `image_preprocessor` we created earlier on the terminal. Run the command below:
-```
- appsody deploy --tag insights/image-preprocessor --push-url $IMAGE_REGISTRY --push --pull-url docker-registry.default.svc.cluster.local:5000
-```
-
- #### 8.12 Deploy the object storage operations service
-
-Go to the appsody project folder `object_storage_operations` we created earlier on the terminal. Run the command below:
-```
- appsody deploy --tag insights/object-storage-operations --push-url $IMAGE_REGISTRY --push --pull-url docker-registry.default.svc.cluster.local:5000
-```
- #### 8.13 Create a new app on OpenShift for the services
-
-Run the commands below:
-```
-$oc new-app --image-stream=text-extractor --name=text-extractor
-$oc expose svc/text-extractor
-$oc new-app --image-stream=image-preprocessor --name=image-preprocessor
-$oc expose svc/image-preprocessor
-$oc new-app --image-stream=object-storage-operations --name=object-storage-operations
-$oc expose svc/object-storage-operations
-```
-
-You can see the application deployed under the insights project on the OpenShift web console. Note down the urls for the services as shown.
-![](images/deployed_services.png)
+Note down the urls under `PATH` column for the services as shown.
 
  #### 8.14 Create an instance of Watson Studio
 
