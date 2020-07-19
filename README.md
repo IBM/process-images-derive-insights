@@ -313,14 +313,18 @@ Copy the `Credentials`, both `API Key` and `URL` as shown below and make a note 
 #### 8.4 Tag the docker image. Replace the placeholder with the region of the container registry.
 
     ```
-    docker tag example/example:latest <region>.icr.io/<my_namespace>/example/example:latest
+    docker tag text-extractor/text-extractor:latest <region>.icr.io/<my_namespace>/text-extractor:latest
+    docker tag image-preprocessor/image-preprocessor:latest <region>.icr.io/<my_namespace>/image-preprocessor:latest
+    docker tag object-storage-operations/object-storage-operations:latest <region>.icr.io/<my_namespace>/object-storage-operations:latest
     ```
     
 #### 8.5 Push the docker images into your namespace. Replace the placeholders for region, namespace with your container registry region and the namespace created earlier. 
 
     ```
     ibmcloud cr login
-    docker push <region>.icr.io/<my_namespace>/example:latest
+    docker push <region>.icr.io/<my_namespace>/text-extractor:latest
+    docker push <region>.icr.io/<my_namespace>/image-preprocessor:latest
+    docker push <region>.icr.io/<my_namespace>/object-storage-operations:latest
     ```
 #### 8.6 Create an instance of OpenShift cluster on IBM Cloud
 
@@ -335,39 +339,28 @@ Create a OpenShift cluster [here](https://cloud.ibm.com/kubernetes/catalog/opens
 
 ![](images/copy_login_command.png)
 
- #### 8.9 Create a new project
+#### 8.9. Create a deployment configurations files  for the three services with the below contents. 
 
-Let us create a project by name `insights`.
-
-```
-    oc new-project insights
-```
-
-Give root permissions to the `default` service account.
-```
-    oc adm policy add-scc-to-user anyuid -z default
-```
-
-#### 8.10. Create a deployment configuration file `example_deployment.yaml` with the below contents. Replace the <region>, <namespace> with your container registry region and the namespace created earlier. 
-
+Create three deployment configuration files - text_extractor_deploy.yaml,image_preprocessor_deploy.yaml and object_storage_operations_deploy.yaml.
+Replace the region, namespace, service name with your container registry region, the namespace created earlier and service name(text-extractor / image-preprocessor / object-storage-operations)  
 ```
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: example-deployment
+  name: <service name>-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: example
+      app: <service name>
   template:
     metadata:
       labels:
-        app: example
+        app: <service name>
     spec:
       containers:
-      - name: example
-        image: <region>.icr.io/<namespace>/example:latest
+      - name: <service name>
+        image: <region>.icr.io/<namespace>/<service name>:latest
     ports:
     - containerPort: 8080
       protocol: TCP
@@ -376,8 +369,8 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: example
-  name: example
+    app: <service name>
+  name: <service name>
 spec:
   ports:
   - port: 8080
@@ -385,20 +378,24 @@ spec:
     targetPort: 8080
     name: web
   selector:
-    app: example
+    app: <service name>
   type: ClusterIP
 ```
 
-#### 8.11 Create the deployment in your cluster.
+#### 8.11 Create the deployments in your cluster.
 
     ```
-    oc apply -f example_deployment.yaml
+    oc apply -f text_extractor_deploy.yaml
+    oc apply -f image_preprocessor_deploy.yaml
+    oc apply -f object_storage_operations_deploy.yaml
     ```
     
-#### 8.12  Create a route for the service.
+#### 8.12  Create a route for the services.
 
     ```
-    oc expose service/example
+    oc expose service/text-extractor
+    oc expose service/image-preprocessor
+    oc expose service/object-storage-operations
     ```
     
 #### 8.13 Get the route for the service   
@@ -409,44 +406,12 @@ spec:
     
 You will see the route to the service as seen below:
 ```
-NAME    HOST/PORT PATH                                                     SERVICES   PORT   TERMINATION   WILDCARD
-example            *example-default...us-south.containers.appdomain.cloud*  example             web           None
+NAME    HOST/PORT           PATH                                                                      SERVICES                 PORT   TERMINATION   WILDCARD
+text-extractor              text-extractor-default...us-south.containers.appdomain.cloud*             text-extractor                  web           None
+image-preprocessor          image-preprocessor-default...us-south.containers.appdomain.cloud*         image-preprocessor              web           None
+object-storage-operations   *object-storage-operations-default...us-south.containers.appdomain.cloud*  object-storage-operations       web           None
 ```
-
- #### 8.10 Deploy the text extractor service
-
-Go to the appsody folder `text_extractor` we created earlier on the terminal. Run the command below:
-```
- appsody deploy --tag insights/text-extractor --push-url $IMAGE_REGISTRY --push --pull-url docker-registry.default.svc.cluster.local:5000
-```
-
- #### 8.11 Deploy the image pre-processor service
-
-Go to the appsody project folder `image_preprocessor` we created earlier on the terminal. Run the command below:
-```
- appsody deploy --tag insights/image-preprocessor --push-url $IMAGE_REGISTRY --push --pull-url docker-registry.default.svc.cluster.local:5000
-```
-
- #### 8.12 Deploy the object storage operations service
-
-Go to the appsody project folder `object_storage_operations` we created earlier on the terminal. Run the command below:
-```
- appsody deploy --tag insights/object-storage-operations --push-url $IMAGE_REGISTRY --push --pull-url docker-registry.default.svc.cluster.local:5000
-```
- #### 8.13 Create a new app on OpenShift for the services
-
-Run the commands below:
-```
-$oc new-app --image-stream=text-extractor --name=text-extractor
-$oc expose svc/text-extractor
-$oc new-app --image-stream=image-preprocessor --name=image-preprocessor
-$oc expose svc/image-preprocessor
-$oc new-app --image-stream=object-storage-operations --name=object-storage-operations
-$oc expose svc/object-storage-operations
-```
-
-You can see the application deployed under the insights project on the OpenShift web console. Note down the urls for the services as shown.
-![](images/deployed_services.png)
+Note down the urls under `PATH` column for the services as shown.
 
  #### 8.14 Create an instance of Watson Studio
 
