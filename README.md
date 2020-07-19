@@ -313,9 +313,9 @@ Copy the `Credentials`, both `API Key` and `URL` as shown below and make a note 
 #### 8.4 Tag the docker image. Replace the placeholder with the region of the container registry.
 
     ```
-    docker tag text-extractor/text-extractor:latest <region>.icr.io/<my_namespace>/text-extractor:latest
-    docker tag image-preprocessor/image-preprocessor:latest <region>.icr.io/<my_namespace>/image-preprocessor:latest
-    docker tag object-storage-operations/object-storage-operations:latest <region>.icr.io/<my_namespace>/object-storage-operations:latest
+    docker tag dev.local/text-extractor:latest <region>.icr.io/<my_namespace>/text-extractor:latest
+    docker tag dev.local/image-preprocessor:latest <region>.icr.io/<my_namespace>/image-preprocessor:latest
+    docker tag dev.local/object-storage-operations:latest <region>.icr.io/<my_namespace>/object-storage-operations:latest
     ```
     
 #### 8.5 Push the docker images into your namespace. Replace the placeholders for region, namespace with your container registry region and the namespace created earlier. 
@@ -338,6 +338,8 @@ Create a OpenShift cluster [here](https://cloud.ibm.com/kubernetes/catalog/opens
  #### 8.8 Log in to OpenShift using the CLI and create a new project
 
 ![](images/copy_login_command.png)
+
+Run the command.
 
 #### 8.9. Create a deployment configurations files  for the three services with the below contents. 
 
