@@ -292,68 +292,48 @@ Copy the `Credentials`, both `API Key` and `URL` as shown below and make a note 
 
 ### 8. Deploy and run on cloud
 
- #### 8.1 Create an instance of OpenShift cluster on IBM Cloud
+#### 8.1 Login to IBM Cloud
+
+    ```
+    ibmcloud login
+    ```
+    
+#### 8.2 Add a namespace to create your own image repository. Replace <my_namespace> with your preferred namespace.
+
+    ```
+    ibmcloud cr namespace-add <my_namespace>
+    ```
+    
+#### 8.3 To ensure that your namespace is created, run the ibmcloud cr namespace-list command.
+
+    ```
+    ibmcloud cr namespace-list
+    ```
+    
+#### 8.4 Tag the docker image. Replace the placeholder with the region of the container registry.
+
+    ```
+    docker tag example/example:latest <region>.icr.io/<my_namespace>/example/example:latest
+    ```
+    
+#### 8.5 Push the docker images into your namespace. Replace the placeholders for region, namespace with your container registry region and the namespace created earlier. 
+
+    ```
+    ibmcloud cr login
+    docker push <region>.icr.io/<my_namespace>/example:latest
+    ```
+#### 8.6 Create an instance of OpenShift cluster on IBM Cloud
 
 Create a OpenShift cluster [here](https://cloud.ibm.com/kubernetes/catalog/openshiftcluster).
 ![](images/openshift_create.png)
 
- #### 8.2 Open the OpenShift console
+ #### 8.7 Open the OpenShift console
 
 ![](images/open_console.png)
 
- #### 8.3 Log in to OpenShift using the CLI and create a new project
+ #### 8.8 Log in to OpenShift using the CLI and create a new project
 
 ![](images/copy_login_command.png)
-
- #### 8.4 Create a route for your Docker registry if not already created
-
-```
-  $ oc project default
-  $ oc get svc
-```
-
-The output appears as shown below:
-
-```
-  NAME               TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)                      AGE
-  docker-registry    ClusterIP      172.21.xxx.xx    <none>           5000/TCP                     18h
-  kubernetes         ClusterIP      172.21.x.x       <none>           443/TCP,53/UDP,53/TCP        18h
-  myfirstosdeploy    ClusterIP      172.21.xx.xxx    <none>           5000/TCP                     17h
-  registry-console   ClusterIP      172.21.xxx.xxx   <none>           9000/TCP                     18h
-  router             LoadBalancer   172.21.xx.x      169.47.xxx.xxx   80:31297/TCP,443:30385/TCP   18h
-
-```
- #### 8.5 Run the following command to create a route to the Docker registry
-
-```
-  $ oc create route reencrypt --service=docker-registry
-```
-
- #### 8.6 Check the create route details
-
-```
-  $ oc get route docker-registry
-```
-
-The output appears as shown below:
-```
- NAME              HOST/PORT                                                                                                            PATH      SERVICES          PORT       TERMINATION   WILDCARD
-  docker-registry   docker-registry-default.clustersiteam-5290cxxxxxxxxxxd1b85xxx-0001.us-east.containers.appdomain.cloud               docker-registry   5000-tcp   reencrypt     None
-```
-
- #### 8.7 Note the Docker registry URL that is displayed with the pattern — docker-registry-default.<cluster_name>-<ID_string>.<region>.containers.appdomain.cloud
-
-Set it as a variable.
-
-```
- export IMAGE_REGISTRY=docker-registry-default.<cluster_name>-<ID_string>.<region>.containers.appdomain.cloud
-```
-
- #### 8.8 Log in to the Docker registry
-
-```
-  docker login -u $(oc whoami) -p $(oc whoami -t) $IMAGE_REGISTRY
-```
 
  #### 8.9 Create a new project
 
@@ -366,6 +346,71 @@ Let us create a project by name `insights`.
 Give root permissions to the `default` service account.
 ```
     oc adm policy add-scc-to-user anyuid -z default
+```
+
+#### 8.10. Create a deployment configuration file `example_deployment.yaml` with the below contents. Replace the <region>, <namespace> with your container registry region and the namespace created earlier. 
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: example
+  template:
+    metadata:
+      labels:
+        app: example
+    spec:
+      containers:
+      - name: example
+        image: <region>.icr.io/<namespace>/example:latest
+    ports:
+    - containerPort: 8080
+      protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: example
+  name: example
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+    name: web
+  selector:
+    app: example
+  type: ClusterIP
+```
+
+#### 8.11 Create the deployment in your cluster.
+
+    ```
+    oc apply -f example_deployment.yaml
+    ```
+    
+#### 8.12  Create a route for the service.
+
+    ```
+    oc expose service/example
+    ```
+    
+#### 8.13 Get the route for the service   
+
+    ```
+    oc get routes
+    ```
+    
+You will see the route to the service as seen below:
+```
+NAME    HOST/PORT PATH                                                     SERVICES   PORT   TERMINATION   WILDCARD
+example            *example-default...us-south.containers.appdomain.cloud*  example             web           None
 ```
 
  #### 8.10 Deploy the text extractor service
