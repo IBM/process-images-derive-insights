@@ -156,7 +156,15 @@ c. [Build the stack](https://developer.ibm.com/tutorials/create-a-custom-appsody
 
 ### 4. Create object storage operations service
 
- #### 4.1 [TODO - Link tutorial steps]
+ #### 4.1 Create an appsody stack with Python Flask and Object storage operations support
+
+  Please refer to the below 3 steps in the tutorial [Create a custom Appsody stack with template for IBM Cloud Object Storage operations](https://developer.ibm.com/tutorials/create-custom-appsody-stack-template-ibm-cloud-object-storage/) to create the appsody stack.
+ 
+ a. [Create a copy of an Appsody Python Flask stack](https://developer.ibm.com/tutorials/create-custom-appsody-stack-template-ibm-cloud-object-storage/#1-create-a-copy-of-the-python-flask-stack)
+
+b. [Modify the Python Flask stack to add support for Object Storage operations](https://developer.ibm.com/tutorials/create-custom-appsody-stack-template-ibm-cloud-object-storage/#2-modify-the-python-flask-stack-to-add-support-for-object-storage-operations)
+
+c. [Build the stack](https://developer.ibm.com/tutorials/create-custom-appsody-stack-template-ibm-cloud-object-storage/#3-build-the-stack)
 
  #### 4.2 Create an instance of IBM Cloud Object Storage
 
