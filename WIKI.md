@@ -67,4 +67,8 @@ Use Watson Natural language Understanding to derive insights on the text.
 
 1. [Create a custom Appsody stack with support for Python Flask and Tesseract](https://developer.ibm.com/tutorials/create-a-custom-appsody-stack-with-python-flask-and-tesseract-support/)
 
-TODO - provide tutorial links
+2. [Create a custom Appsody stack with support for Python Flask and OpenCV](https://developer.ibm.com/tutorials/create-a-custom-appsody-stack-with-python-flask-and-opencv-support/)
+
+3. [Create a custom Appsody stack with template for IBM Cloud Object Storage operations](https://developer.ibm.com/tutorials/create-custom-appsody-stack-template-ibm-cloud-object-storage/)
+
+
