@@ -16,7 +16,6 @@ app=Flask(__name__)
 UPLOAD_FOLDER = '.'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024
-global bucket_global
 bucket_global = 'classifieds'
 
 
@@ -100,10 +99,11 @@ def set_bucket():
       200:
         description: A successful reply. Returns home page html.
    """
+   global bucket_global
    bucketname = request.args.get("buket");
    print("setting bucket: " + bucketname);
    bucket_global = bucketname
-   return "success";
+   return bucket_global;
 
 @app.route('/upload', methods = ['GET', 'POST'])
 @track_requests
@@ -116,6 +116,7 @@ def upload_file():
         description: A successful reply. Returns home page html.
     """
    print("inside upload method")
+   global bucket_global
    if request.method == 'POST':
       f = request.files['file']
       bucket = bucket_global
