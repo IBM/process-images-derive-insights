@@ -4,7 +4,7 @@ Extract relevant text content from an image and derive insights
 
 ## Short Description
 
-Process and deriving insights from scanned documents that has information organized into various sections or layouts.
+Process and derive insights from scanned documents that dispaly information in various sections or layouts
 
 ## Author
 Rahul Reddy Ravipally (https://developer.ibm.com/profiles/raravi86/)
@@ -19,34 +19,33 @@ NA
 
 ## Summary
 
-Extracting information from specific sections of a newspaper/scanned document and processing them is a very inefficient and tedious job, especially when there are thousands of documents. What if we programmatically extract information from different sections in the document and also give you insights about those sections? Wouldn't it be much easier and more efficient ? We are doing exactly the same, in this code pattern.
-This code pattern demonstrates a methodology of deriving insights from scanned documents that has information organized into various sections or layouts.
+Extracting information from specific sections of a newspaper or scanned document and processing them is an inefficient and tedious job, especially when there are thousands of documents. What if you could programmatically extract information from different sections in the document while simultaneously gaining insights about those sections? Wouldn't it be much easier and more efficient?
 
+This code pattern shows you how to derive insights from scanned documents that dispaly information in various sections or layouts
 
 ## Description
 
-In this code patterns we make use of various appsody stacks, to build required microservices and deploy them on OpenShift cluster on IBM Cloud. We use a master application deployed on Watson Studio to orchestrate between these microservices. These microservices help us in processing  and extracting information from the scanned documents that has information organized into various sections or layouts. The information extracted is feed to Watson Language Translator service which converts non-english text into english text. This converted text is feed to Watson Natural Language Understanding service which gives us key information in the text. We use the output given by Watson Language Understanding service to form meaningful graphical insights.
+This code pattern shows you how to use various [Appsody stacks](https://appsody.dev/docs/stacks/stacks-overview/) to build required microservices and deploy them to a Red Hat OpenShift cluster on IBM Cloud. A master application deployed on Watson Studio is used to orchestrate between the microservices that help process and extract information from the scanned documents. The extracted information is fed to a Watson Language Translator service which converts non-English text into English text. This converted text is fed to a Watson Natural Language Understanding service which provides key information in the text. We use the output given by Watson Language Understanding service to form meaningful graphical insights.
 
-When the reader has completed this Code Pattern, they will understand how to:
+After completing this code pattern, you will understand how to:
 
-Containerize OpenCV, Tesseract and Cloud object storage client using an Appsody stack, and deploy them on an OpenShift cluster on IBM Cloud.
-Pre-process images to separate them into different sections using OpenCV
-Use Tesseract to extract text from an image
-Use Watson language translation to translate the text from Hindi to English.
-Use Watson Natural language Understanding to derive insights on the text.
+* Containerize OpenCV, Tesseract, and a Cloud object storage client using an Appsody stack and deploy them on an OpenShift cluster on IBM Cloud.<!--EM: This sounds a littel off. are you really containerizing OpenCV, Tesseract, & Cloud Object Storage?? Or you are containerizing outputs from those tools? I think I'm confused about what's being containerized-->
+* Pre-process images to separate them into different sections using OpenCV.
+* Use Tesseract to extract text from an image
+* Use Watson Language Translation to translate the text from Hindi to English.
+* Use Watson Natural language Understanding to derive insights on the text.
 
 ## Flow
 
 ![](images/architecture.png)
 
-1. The classifieds image is stored in Object storage, and the jupyter notebook execution is triggered.
+1. The classifieds image is stored in Object storage<!--EM: Any object storage? Or IBM Cloud Object Storage?-->, and the Jupyter notebook execution is triggered.
 2. The Object storage operations microservice is invoked.
-3. The classifieds image from Object storage is retrieved.
-4. The Image pre-processor service is invoked. The different sections in the image are identified and extracted into separate images each containing only one single classified.
-5. The individual classified image is sent to the Text extractor service where the address text is extracted.
+3. The classifieds image from the Object storage is retrieved.
+4. The Image pre-processor service is invoked. The different sections in the image are identified and extracted into separate images, wit each image containing only one single classified.
+5. The individual classified image is sent to the Text extractor <!--EM: What is this text extractor service? Is that part of Tesseract?-->service where the address text is extracted.
 6. The extracted address text is sent to Watson Language Translator where the content is translated to English.
 7. The translated text in English is sent to Watson Natural Language Understanding where the entities of interest is extracted to generate the required insights.
-
 
 ## Included components
 
