@@ -4,7 +4,7 @@ Extract relevant text content from an image and derive insights
 
 ## Short Description
 
-Process and derive insights from scanned documents that dispaly information in various sections or layouts
+Process and derive insights from scanned documents that display information in various sections or layouts
 
 ## Author
 Rahul Reddy Ravipally (https://developer.ibm.com/profiles/raravi86/)
@@ -21,7 +21,7 @@ NA
 
 Extracting information from specific sections of a newspaper or scanned document and processing them is an inefficient and tedious job, especially when there are thousands of documents. What if you could programmatically extract information from different sections in the document while simultaneously gaining insights about those sections? Wouldn't it be much easier and more efficient?
 
-This code pattern shows you how to derive insights from scanned documents that dispaly information in various sections or layouts
+This code pattern shows you how to derive insights from scanned documents that display information in various sections or layouts.
 
 ## Description
 
@@ -30,6 +30,7 @@ This code pattern shows you how to use various [Appsody stacks](https://appsody.
 After completing this code pattern, you will understand how to:
 
 * Containerize OpenCV, Tesseract, and a Cloud object storage client using an Appsody stack and deploy them on an OpenShift cluster on IBM Cloud.<!--EM: This sounds a littel off. are you really containerizing OpenCV, Tesseract, & Cloud Object Storage?? Or you are containerizing outputs from those tools? I think I'm confused about what's being containerized-->
+<!--BK: We are deploying OpenCV, Tesseract and Cloud Object Storage in docker containers. This enables us to deploy it on OpenShift on IBM cloud -->
 * Pre-process images to separate them into different sections using OpenCV.
 * Use Tesseract to extract text from an image
 * Use Watson Language Translation to translate the text from Hindi to English.
@@ -39,11 +40,11 @@ After completing this code pattern, you will understand how to:
 
 ![](images/architecture.png)
 
-1. The classifieds image is stored in Object storage<!--EM: Any object storage? Or IBM Cloud Object Storage?-->, and the Jupyter notebook execution is triggered.
+1. The classifieds image is stored in Object storage<!--EM: Any object storage? Or IBM Cloud Object Storage?--> <!--BK: Its IBM Cloud Object Storage -->, and the Jupyter notebook execution is triggered.
 2. The Object storage operations microservice is invoked.
 3. The classifieds image from the Object storage is retrieved.
-4. The Image pre-processor service is invoked. The different sections in the image are identified and extracted into separate images, wit each image containing only one single classified.
-5. The individual classified image is sent to the Text extractor <!--EM: What is this text extractor service? Is that part of Tesseract?-->service where the address text is extracted.
+4. The Image pre-processor service is invoked. The different sections in the image are identified and extracted into separate images, with each image containing only one single classified.
+5. The individual classified image is sent to the Text extractor <!--EM: What is this text extractor service? Is that part of Tesseract?--><!--BK: Yes we create a service to invoke APIs on Tesseract.-->service where the address text is extracted.
 6. The extracted address text is sent to Watson Language Translator where the content is translated to English.
 7. The translated text in English is sent to Watson Natural Language Understanding where the entities of interest is extracted to generate the required insights.
 
