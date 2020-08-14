@@ -19,18 +19,19 @@ NA
 
 ## Summary
 
-Extracting information from specific sections of a newspaper or scanned document and processing them is an inefficient and tedious job, especially when there are thousands of documents. What if you could programmatically extract information from different sections in the document while simultaneously gaining insights about those sections? Wouldn't it be much easier and more efficient?
+Extracting information from specific sections of a newspaper or scanned document and processing them is an inefficient and tedious job, especially when there are thousands of documents. What if you could programmatically extract information from different sections in the document while simultaneously gaining insights about those sections?
 
-This code pattern shows you how to derive insights from scanned documents that display information in various sections or layouts.
+This code pattern shows you how to derive insights from scanned documents that display information in various sections or layouts. In this pattern, the information gathered from the documents needs to be translated to English so that the user can derive insights from the docs.
 
 ## Description
 
-This code pattern shows you how to use various [Appsody stacks](https://appsody.dev/docs/stacks/stacks-overview/) to build required microservices and deploy them to a Red Hat OpenShift cluster on IBM Cloud. A master application deployed on Watson Studio is used to orchestrate between the microservices that help process and extract information from the scanned documents. The extracted information is fed to a Watson Language Translator service which converts non-English text into English text. This converted text is fed to a Watson Natural Language Understanding service which provides key information in the text. We use the output given by Watson Language Understanding service to form meaningful graphical insights.
+This code pattern shows you how to use various [Appsody stacks](https://appsody.dev/docs/stacks/stacks-overview/) to build required microservices and deploy them to a Red Hat OpenShift cluster on IBM Cloud. A master application deployed on Watson Studio is used to orchestrate between the microservices that help process and extract information from the scanned documents. 
+
+The extracted information is fed to a Watson Language Translator service which converts non-English text into English text. This converted text is fed to a Watson Natural Language Understanding service which provides key information in the text. We use the output given by Watson Language Understanding service to form meaningful graphical insights.
 
 After completing this code pattern, you will understand how to:
 
-* Containerize OpenCV, Tesseract, and a Cloud object storage client using an Appsody stack and deploy them on an OpenShift cluster on IBM Cloud.<!--EM: This sounds a littel off. are you really containerizing OpenCV, Tesseract, & Cloud Object Storage?? Or you are containerizing outputs from those tools? I think I'm confused about what's being containerized-->
-<!--BK: We are deploying OpenCV, Tesseract and Cloud Object Storage in docker containers. This enables us to deploy it on OpenShift on IBM cloud -->
+* Containerize OpenCV, Tesseract, and a Cloud object storage client using an Appsody stack and deploy them on an OpenShift cluster on IBM Cloud.
 * Pre-process images to separate them into different sections using OpenCV.
 * Use Tesseract to extract text from an image
 * Use Watson Language Translation to translate the text from Hindi to English.
@@ -70,5 +71,3 @@ After completing this code pattern, you will understand how to:
 2. [Create a custom Appsody stack with support for Python Flask and OpenCV](https://developer.ibm.com/tutorials/create-a-custom-appsody-stack-with-python-flask-and-opencv-support/)
 
 3. [Create a custom Appsody stack with template for IBM Cloud Object Storage operations](https://developer.ibm.com/tutorials/create-custom-appsody-stack-template-ibm-cloud-object-storage/)
-
-
