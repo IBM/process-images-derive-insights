@@ -11,6 +11,8 @@ Rahul Reddy Ravipally (https://developer.ibm.com/profiles/raravi86/)
 
 Balaji Kadambi (https://developer.ibm.com/profiles/bkadambi/)
 
+Manjula Hosurmath (https://developer.ibm.com/profiles/mhosurma/)
+
 ## Code
 https://github.com/IBM/process-images-derive-insights
 
