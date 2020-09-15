@@ -123,6 +123,7 @@ Press Ctrl+C on the terminal to stop the running server.
 a. [Create a copy of an Appsody Python Flask stack](https://developer.ibm.com/tutorials/create-a-custom-appsody-stack-with-python-flask-and-opencv-support/#1-create-copy-of-python-flask-stack)
 
 b. [Modify the Python Flask stack to add support for OpenCV](https://developer.ibm.com/tutorials/create-a-custom-appsody-stack-with-python-flask-and-opencv-support/#2-modify-the-python-flask-stack-to-add-support-for-opencv)
+>Note: Please specify the version of the opencv-python in the install command - pip install opencv-python==4.1.2.30. This change is needed for both  `Dockerfile-stack` under the image folder and `Dockerfile` under folder image/project.
 
 c. [Build the stack](https://developer.ibm.com/tutorials/create-a-custom-appsody-stack-with-python-flask-and-opencv-support/#3-build-the-stack)
 
