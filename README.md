@@ -52,6 +52,7 @@ When the reader has completed this Code Pattern, they will understand how to:
 * [Python 3](https://www.python.org/downloads/): Install python 3.
 * [Jupyter Software](https://jupyter.org/install): Install Jupyter Software.
 * [Appsody CLI](https://appsody.dev/docs/installing/installing-appsody): Install Appsody CLI.
+* [Docker CLI](https://gist.github.com/mridulrb/4d9a52183eb7f50f7ee4add26d47b9e6): Install Docker
 
 # Steps
 
