@@ -278,11 +278,11 @@ Copy the `Credentials`, both `API Key` and `URL` as shown below and make a note 
   ```
  Goto the `image_preprocessor` folder and run the below commands:
   ```
-  $ appsody run -p 4501:8080 -p 3502:5678
+  $ appsody run -p 4501:8080 -p 4502:5678
   ```
  Goto the `object_storage_operations` folder and run the below commands:
   ```
-  $ appsody run -p 5501:8080 -p 3502:5678
+  $ appsody run -p 5501:8080 -p 5502:5678
   ```
 
  #### 7.2 Set up and run jupyter notebook
