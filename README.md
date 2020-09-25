@@ -123,7 +123,8 @@ Press Ctrl+C on the terminal to stop the running server.
 
 a. [Create a copy of an Appsody Python Flask stack](https://developer.ibm.com/tutorials/create-a-custom-appsody-stack-with-python-flask-and-opencv-support/#1-create-copy-of-python-flask-stack)
 
-b. [Modify the Python Flask stack to add support for Tesseract](https://developer.ibm.com/tutorials/create-a-custom-appsody-stack-with-python-flask-and-opencv-support/#2-modify-the-python-flask-stack-to-add-support-for-opencv)
+b. [Modify the Python Flask stack to add support for OpenCV](https://developer.ibm.com/tutorials/create-a-custom-appsody-stack-with-python-flask-and-opencv-support/#2-modify-the-python-flask-stack-to-add-support-for-opencv)
+>Note: Please specify the version of the opencv-python in the install command - pip install opencv-python==4.1.2.30. This change is needed for both  `Dockerfile-stack` under the image folder and `Dockerfile` under folder image/project.
 
 c. [Build the stack](https://developer.ibm.com/tutorials/create-a-custom-appsody-stack-with-python-flask-and-opencv-support/#3-build-the-stack)
 
@@ -222,7 +223,7 @@ The files `Pipfile`,`osclient.py` and `config.ini` are created under the `object
 
 Copy the files `__init__.py` under the folder `sources/object_storage_operations/` in this repo that you have cloned.
 
-Place file `__init__.py` under folder `app3` with `__init__.py` under the folder `sources/object_storage_operations/` in this repo that you have cloned.
+Replace file `__init__.py` under folder `object_storage_operations` with `__init__.py` under the folder `sources/object_storage_operations/` in this repo that you have cloned.
 
  * The file `__init__.py` has REST interfaces exposed to test the Cloud Object Storage operations.
 
