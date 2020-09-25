@@ -222,7 +222,7 @@ The files `Pipfile`,`osclient.py` and `config.ini` are created under the `object
 
 Copy the files `__init__.py` under the folder `sources/object_storage_operations/` in this repo that you have cloned.
 
-Place file `__init__.py` under folder `app3` with `__init__.py` under the folder `sources/object_storage_operations/` in this repo that you have cloned.
+Replace file `__init__.py` under folder `object_storage_operations` with `__init__.py` under the folder `sources/object_storage_operations/` in this repo that you have cloned.
 
  * The file `__init__.py` has REST interfaces exposed to test the Cloud Object Storage operations.
 
